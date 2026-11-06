@@ -133,6 +133,7 @@
       <div class="badge">DIGITAL BUSINESS CARD</div>
       <div class="company">Jioushun</div>
       <div class="name">Martin.Kao</div>
+      <div style="font-size: 11px; color: #10B981; font-weight: bold; margin-top: 4px;">● 最新版本 v2.0 (已修正)</div>
       <div class="divider"></div>
       <div class="info-row">
         <span class="info-label">公司</span>
@@ -315,11 +316,16 @@
         try {
           const res = await liff.shareTargetPicker([flexMessage]);
           if (res) {
-            // 成功發送
-            liff.closeWindow();
+            alert("✅ 名片已成功發送！");
+            setTimeout(() => {
+              liff.closeWindow();
+            }, 500);
+          } else {
+            showStatus("⚠️ 發送已被取消或中斷。");
           }
         } catch (error) {
-          showStatus("發送失敗或使用者已取消：" + error.message);
+          alert("❌ 發送失敗：" + error.message);
+          showStatus("發送失敗：" + error.message);
         }
       } else {
         alert("當前環境不支援 ShareTargetPicker，請確認 LINE 後台的 Share Target Picker 是否已開啟為 ON。");
